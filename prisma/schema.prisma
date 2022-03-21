@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model products {
+  id               Int     @id @default(autoincrement())
+  is_favorited     Boolean @default(false)
+  comments         String?
+  url_image        String?
+  description      String  @db.VarChar(255)
+  pricing          String  @db.VarChar(255)
+  how_many_times   Int?    @default(0)
+  avaliation       Int?    @default(0)
+  total_avaliation Int?    @default(0)
+  category         String  @db.VarChar(255)
+}
