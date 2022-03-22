@@ -58,11 +58,11 @@ app.get('/automation', async (req, res) => {
             is_favorited: index % 2 === 0,
             total_avaliation: 1,
             url_image: item.imageLink,
-            category: "shop"
+            category: "clothes"
         }
       })
 
-      return products
+      return {products: products}
     } catch (err) {
       console.log(err)
       return {err}
@@ -74,4 +74,19 @@ app.get('/automation', async (req, res) => {
   
 })
 
+app.get("/checkout/:id", async (req, res) => {
+  const {id} = req.params
 
+  try {
+    const products = await prisma.products.findUnique({
+      where: {
+        id: Number(id)
+      }
+    })
+    return res.status(200).json(products);
+  }catch (err) {
+    console.log(err)
+    return res.status(500).json({erroMessage: 'ocorreu um erro ao consultar o banco', data: {err}})
+  }
+
+})
