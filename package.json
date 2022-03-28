@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "go": "nodemon src/server.js"
+    "go": "sudo fuser -k 3333/tcp && nodemon src/server.js",
+    "start": "nodemon src/server.js"
   },
   "license": "MIT",
   "dependencies": {

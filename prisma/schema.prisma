@@ -7,15 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model likes {
+  id         Int      @id @default(autoincrement())
+  id_product Int
+  id_user    Int
+  products   products @relation(fields: [id_product], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users      users    @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
 model products {
-  id               Int     @id @default(autoincrement())
-  is_favorited     Boolean @default(false)
-  comments         String?
-  url_image        String?
-  description      String  @db.VarChar(255)
-  pricing          String  @db.VarChar(255)
-  how_many_times   Int?    @default(0)
-  avaliation       Int?    @default(0)
-  total_avaliation Int?    @default(0)
-  category         String  @db.VarChar(255)
+  id             Int     @id @default(autoincrement())
+  url_image      String?
+  description    String  @db.VarChar(255)
+  category       String  @db.VarChar(255)
+  pricing        Decimal @db.Decimal(10, 5)
+  how_many_times Int?    @default(1)
+  quantity       Int?    @default(1)
+  likes          likes[]
+}
+
+model users {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  name       String   @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  email      String   @db.VarChar(255)
+  cpf        String?  @db.VarChar(255)
+  tel        String?  @db.VarChar(255)
+  likes      likes[]
 }
