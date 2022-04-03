@@ -35,4 +35,9 @@ model users {
   cpf        String?  @db.VarChar(255)
   tel        String?  @db.VarChar(255)
   likes      likes[]
+
+  @@unique(email)
+  @@unique(tel)
+  @@unique(cpf)
+  @@unique(name)
 }
