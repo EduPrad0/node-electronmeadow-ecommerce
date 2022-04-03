@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "go": "sudo fuser -k 3333/tcp && nodemon src/server.js",
-    "start": "nodemon src/server.js"
+    "start": "node src/server.js"
   },
   "license": "MIT",
   "dependencies": {
