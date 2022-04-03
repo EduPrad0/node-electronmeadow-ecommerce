@@ -1,5 +1,4 @@
 const express = require('express');
-const mock = require('../mock.json');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client')
 
@@ -64,33 +63,6 @@ router.post('/api/get_orders', async (req, res) => {
 })
 
 
-
-
-router.get('/automation', async (req,res) => {
-  const response = Promise.all(
-    mock.data.map(async (i, k) => {
-      try{
-        const res = await prisma.products.create({
-          data: {
-            category: 'shop',
-            description: i.title,
-            pricing: i.salePrice.value,
-            how_many_times: i.installment.months,
-            quantity: 6,
-            url_image: i.imageLink
-          }
-        })
-  
-        return res;
-      }catch (e) {
-        return {e}
-      }
-    })
-  )
-
-
-  res.json(response)
-})
 module.exports = {
   router
 }

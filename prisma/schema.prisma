@@ -17,27 +17,22 @@ model likes {
 
 model products {
   id             Int     @id @default(autoincrement())
-  url_image      String?
+  url_image      String
   description    String  @db.VarChar(255)
   category       String  @db.VarChar(255)
   pricing        Decimal @db.Decimal(10, 5)
-  how_many_times Int?    @default(1)
-  quantity       Int?    @default(1)
+  how_many_times Int
+  quantity       Int
   likes          likes[]
 }
 
 model users {
   id         Int      @id @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamp(6)
-  name       String   @db.VarChar(255)
+  created_at DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  name       String   @unique @db.VarChar(255)
   password   String   @db.VarChar(255)
-  email      String   @db.VarChar(255)
-  cpf        String?  @db.VarChar(255)
-  tel        String?  @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+  cpf        String   @unique @db.VarChar(25)
+  tel        String?  @db.VarChar(25)
   likes      likes[]
-
-  @@unique(email)
-  @@unique(tel)
-  @@unique(cpf)
-  @@unique(name)
 }

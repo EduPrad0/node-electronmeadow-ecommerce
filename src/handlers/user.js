@@ -4,10 +4,10 @@ const { authRoute } = require('../middlewares/token');
 const userController = require('../controllers/userController');
 
 
-router.post('/login', userController.login);
-router.post('/register', userController.register);
-router.get('/likes', authRoute, userController.getLikes);
-router.post('/likes', authRoute, userController.postLike)
+router.post('/api/login', userController.login);
+router.post('/api/register', userController.register);
+router.get('/api/likes', authRoute, userController.getLikes);
+router.post('/api/likes', authRoute, userController.postLike)
 
 
 
