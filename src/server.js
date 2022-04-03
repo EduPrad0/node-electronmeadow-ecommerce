@@ -8,4 +8,4 @@ app.use(express.json());
 app.use(cors());
 app.use(productsRoutes)
 app.use(userRoutes)
-app.listen(80, '0.0.0.0');
+app.listen(80);
