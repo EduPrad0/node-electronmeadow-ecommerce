@@ -8,4 +8,9 @@ app.use(express.json());
 app.use(cors());
 app.use(productsRoutes)
 app.use(userRoutes)
-app.listen(80);
+
+const port = process.env.PORT || 80;
+app.listen(port, err => {
+    if(err) throw err;
+    console.log("%c Server running", "color: green");
+});
